@@ -6,7 +6,7 @@ from app.utils.data_processing import prepare_data_for_model
 from sqlalchemy.orm import Session
 
 def train_model(db: Session, task: str, data):
-    mlflow.set_tracking_uri("http://mlflow:5000")
+    mlflow.set_tracking_uri("postgresql://user:password@db/mlflow")
     mlflow.set_experiment(f"huggingface_{task}")
 
     with mlflow.start_run():

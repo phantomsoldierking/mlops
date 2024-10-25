@@ -27,17 +27,22 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=automl_mlops
+      - POSTGRES_MULTIPLE_DATABASES=mlflow,airflow
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./init-multiple-databases.sh:/docker-entrypoint-initdb.d/init-multiple-databases.sh
+
 
   mlflow:
-    image: mlflow
+    image: ghcr.io/mlflow/mlflow:v2.3.1
     ports:
       - "5000:5000"
     environment:
       - MLFLOW_TRACKING_URI=postgresql://user:password@db/mlflow
-    depends_on:
-      - db
+    volumes:
+      - ./mlflow:/mlflow
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri postgresql://user:password@db/mlflow --default-artifact-root /mlflow
+
 
   airflow:
     image: apache/airflow:2.2.3
