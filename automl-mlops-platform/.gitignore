@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.env
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDEs
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.log
+*.sqlite3
+*.db
+
+# MLflow
+mlruns/
+
+# Airflow
+airflow/logs/
+airflow/*.pid
+
+# Docker
+*.env
+.dockerignore
+
+# Kubernetes
+kubeconfig

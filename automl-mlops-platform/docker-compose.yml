@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db/automl_mlops
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - AIRFLOW_API_URL=http://airflow:8080/api/v1
+    depends_on:
+      - db
+      - mlflow
+      - airflow
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=automl_mlops
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mlflow:
+    image: mlflow
+    ports:
+      - "5000:5000"
+    environment:
+      - MLFLOW_TRACKING_URI=postgresql://user:password@db/mlflow
+    depends_on:
+      - db
+
+  airflow:
+    image: apache/airflow:2.2.3
+    ports:
+      - "8080:8080"
+    environment:
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql://user:password@db/airflow
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
