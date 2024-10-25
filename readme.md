@@ -91,3 +91,5 @@ https://github.com/pdefusco/MLOps
 
 
 https://github.com/samalba/hf-model-ops
+
+Explanation of the Project -https://docs.google.com/document/d/1JW9ilDiosVyVeDjCR_p9nWI2yvLGt_zSQObg6z--aaQ/edit?addon_store&tab=t.0
