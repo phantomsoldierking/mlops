@@ -1,21 +1,57 @@
 "use client";
-
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Code2 } from 'lucide-react';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Github, Linkedin, Mail, Code2, Twitter, ExternalLink } from 'lucide-react';
 
 export default function Footer() {
   const teamMembers = [
-    { name: 'Anas', role: 'Developer' },
-    { name: 'Yogeshgouda', role: 'Developer' },
-    { name: 'Vishesh', role: 'Developer' },
-    { name: 'Yash', role: 'Developer' },
+    { 
+      name: 'Anas', 
+      role: 'Developer',
+      github: 'https://github.com/anas',
+      linkedin: 'https://linkedin.com/in/anas',
+      email: 'anas@example.com'
+    },
+    { 
+      name: 'Yogeshgouda', 
+      role: 'Developer',
+      github: 'https://github.com/yogeshgouda',
+      linkedin: 'https://linkedin.com/in/yogeshgouda',
+      email: 'yogeshgouda@example.com'
+    },
+    { 
+      name: 'Vishesh', 
+      role: 'Developer',
+      github: 'https://github.com/vishesh',
+      linkedin: 'https://linkedin.com/in/vishesh',
+      email: 'vishesh@example.com'
+    },
+    { 
+      name: 'Yash', 
+      role: 'Developer',
+      github: 'https://github.com/yash',
+      linkedin: 'https://linkedin.com/in/yash',
+      email: 'yash@example.com'
+    },
   ];
+
+  const footerLinks = {
+    Platform: [
+      { name: 'Features', href: '#features' },
+      { name: 'Documentation', href: '#docs' },
+      { name: 'API Reference', href: '#api' },
+    ],
+    Resources: [
+      { name: 'Blog', href: '#blog' },
+      { name: 'Tutorials', href: '#tutorials' },
+      { name: 'Support', href: '#support' },
+    ],
+    Company: [
+      { name: 'About Us', href: '#about' },
+      { name: 'Careers', href: '#careers' },
+      { name: 'Contact', href: '#contact' },
+    ],
+  };
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -34,108 +70,99 @@ export default function Footer() {
     visible: { opacity: 1, y: 0 },
   };
 
+  const SocialLink = ({ href, icon: Icon, label }: any) => (
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      className="text-gray-400 hover:text-white transition-colors"
+      aria-label={label}
+    >
+      <Icon className="w-5 h-5" />
+    </motion.a>
+  );
+
   return (
     <motion.footer 
-      className="bg-gradient-to-b from-gray-800 to-gray-900 text-white py-8 mt-8"
+      className="bg-gradient-to-b from-slate-900 to-slate-950 text-white py-12"
       initial="hidden"
       whileInView="visible"
       variants={containerVariants}
       viewport={{ once: true }}
     >
       <div className="container mx-auto px-4">
-        {/* Main Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand Section */}
           <motion.div variants={itemVariants} className="text-center md:text-left">
-            <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-violet-500 bg-clip-text text-transparent">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-violet-500 bg-clip-text text-transparent mb-4">
               AutoML-MLOps Platform
             </h3>
-            <p className="text-gray-300 text-sm">
+            <p className="text-gray-400 text-sm mb-4">
               Empowering machine learning workflows with automated solutions.
             </p>
+            <div className="flex justify-center md:justify-start space-x-4">
+              <SocialLink href="https://github.com/automl-mlops" icon={Github} label="GitHub" />
+              <SocialLink href="https://twitter.com/automl-mlops" icon={Twitter} label="Twitter" />
+              <SocialLink href="mailto:contact@automl-mlops.com" icon={Mail} label="Email" />
+            </div>
           </motion.div>
 
           {/* Quick Links */}
-          <motion.div variants={itemVariants} className="text-center md:text-left">
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-gray-300 text-sm">
-              <li><a href="/data-upload" className="hover:text-blue-400 transition-colors">Data Upload</a></li>
-              <li><a href="/model-training" className="hover:text-blue-400 transition-colors">Model Training</a></li>
-              <li><a href="/predictions" className="hover:text-blue-400 transition-colors">Predictions</a></li>
-              <li><a href="/experiments" className="hover:text-blue-400 transition-colors">Experiments</a></li>
-            </ul>
-          </motion.div>
-
-          {/* Team Section */}
-          <motion.div variants={itemVariants} className="col-span-1 md:col-span-2">
-            <div className="text-center mb-4">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <Code2 className="w-5 h-5 text-blue-400" />
-                <h4 className="font-semibold">Developed by Syntax Squad</h4>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {teamMembers.map((member, index) => (
-                  <TooltipProvider key={index}>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="p-2 rounded-lg bg-gray-700/50 hover:bg-gray-700 transition-colors"
-                        >
-                          <p className="font-medium text-sm">{member.name}</p>
-                          <p className="text-xs text-gray-400">{member.role}</p>
-                        </motion.div>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>View Profile</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
+          {Object.entries(footerLinks).map(([section, links]) => (
+            <motion.div key={section} variants={itemVariants} className="text-center md:text-left">
+              <h4 className="font-semibold text-white mb-4">{section}</h4>
+              <ul className="space-y-2">
+                {links.map((link) => (
+                  <li key={link.name}>
+                    <a 
+                      href={link.href}
+                      className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-1 group"
+                    >
+                      {link.name}
+                      <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </a>
+                  </li>
                 ))}
-              </div>
-            </div>
-          </motion.div>
+              </ul>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Bottom Bar */}
-        <motion.div 
-          variants={itemVariants}
-          className="border-t border-gray-700 pt-6 mt-6"
-        >
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-400">
-              &copy; {new Date().getFullYear()} AutoML-MLOps Platform. All rights reserved.
-            </p>
-            
-            {/* Social Links */}
-            <div className="flex space-x-4">
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Github className="w-5 h-5" />
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-              </motion.a>
+        {/* Team Section */}
+        <motion.div variants={itemVariants} className="border-t border-slate-800 pt-8 mt-8">
+          <div className="text-center mb-6">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Code2 className="w-5 h-5 text-blue-400" />
+              <h4 className="font-semibold">Developed by Syntax Squad</h4>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+              {teamMembers.map((member, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.05 }}
+                  className="p-4 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 transition-colors"
+                >
+                  <p className="font-medium text-sm mb-2">{member.name}</p>
+                  <p className="text-xs text-gray-400 mb-3">{member.role}</p>
+                  <div className="flex justify-center space-x-3">
+                    <SocialLink href={member.github} icon={Github} label={`${member.name}'s GitHub`} />
+                    <SocialLink href={member.linkedin} icon={Linkedin} label={`${member.name}'s LinkedIn`} />
+                    <SocialLink href={`mailto:${member.email}`} icon={Mail} label={`Email ${member.name}`} />
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
+          
+          {/* Copyright */}
+          <motion.div 
+            variants={itemVariants}
+            className="text-center text-gray-400 text-sm mt-8"
+          >
+            <p>© {new Date().getFullYear()} AutoML-MLOps Platform. All rights reserved.</p>
+          </motion.div>
         </motion.div>
       </div>
     </motion.footer>
