@@ -23,7 +23,7 @@ git clone https://github.com/yourusername/automl-mlops-platform.git
 cd automl-mlops-platform
 Build and run the Docker containers:
 
-docker-compose up --build
+docker-compose up --build 
 Access the application:
 
 Frontend: http://localhost:3000
