@@ -2,6 +2,7 @@
 import React from 'react';
 import { ChevronRight, Sparkles, Cloud, Lock, Play, ArrowRight, Star, Globe, Shield, Zap } from 'lucide-react';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import Link from 'next/link';
 
 export default function MainContent() {
   const features = [
@@ -83,7 +84,7 @@ export default function MainContent() {
               <div className="space-y-6">
                 <div className="flex items-center justify-center gap-2">
                   <span className="px-4 py-2 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 backdrop-blur-sm opacity-0 -translate-y-4 animate-[fadeInDown_0.6s_ease-out_0.2s_forwards]">
-                    ✨ New Release v2.0
+                    ✨ New Release v1.0
                   </span>
                 </div>
                 <h1 className="text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 leading-tight tracking-tight">
@@ -96,12 +97,14 @@ export default function MainContent() {
               </div>
               
               <div className="flex flex-col sm:flex-row justify-center gap-4 pt-6">
-                <button 
+               <Link href={'/functions'}> 
+               <button 
                   className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-medium shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group"
                 >
                   Get Started Free
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
+               </Link>
                 <button 
                   className="px-8 py-4 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-800/50 hover:border-slate-600 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group backdrop-blur-sm"
                 >

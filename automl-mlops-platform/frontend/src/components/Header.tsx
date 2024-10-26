@@ -53,7 +53,7 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <NavigationMenu>
-              <NavigationMenuList>
+              <NavigationMenuList className='cursor-pointer'>
                 {navItems.map((item) => (
                   <NavigationMenuItem key={item.href}>
                     <NavigationMenuLink 
