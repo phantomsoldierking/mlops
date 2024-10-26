@@ -14,6 +14,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
+import Image from 'next/image';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -45,10 +46,12 @@ export default function Header() {
         <nav className="flex justify-between items-center h-16">
           {/* Logo */}
           <a href="/" className="text-2xl font-bold">
-            <span className="bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
-              AutoML-MLOps
-            </span>
-          </a>
+  <span className="flex flex-row items-center space-x-2 bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
+    <Image src={'/brain.webp'} alt='brain-logo' width={40} height={40} className='hover:animate-pulse'/>
+    <span>AutoML-MLOps</span>
+  </span>
+</a>
+
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
